@@ -27,13 +27,30 @@ for Vf_p in range(1,10,1):
 Eta=[]
 for i in epsi:
     Eta_p = i*((Ef / Em) - 1) / ((Ef / Em) + i)
+    Eta_p = round(Eta_p,3) #arredondamento 3 casas decimais
     Eta.append(Eta_p)
+
 
 def Halpin_tsai(Eta, Vf):
     Et = Em * ((1 + (Eta * Vf)) / (1 - (Eta * Vf)))  # Método analítico Halpin-Tsai
     return Et
 
-print(El)
-print(Vf)
-print(Eta)
+Et_linha = []
+Eta_matriz=[]
 
+for i in range(len(Eta)):
+    Ett = Eta[i]
+    for j in range(len(Vf)):
+        Vff = Vf[j]
+        a=Halpin_tsai(Ett, Vff)
+        a = round(a, 3)  # arrendodamento 3 casas decimais
+        Et_linha.append(a)
+    Eta_matriz.append(Et_linha)
+    Et_linha=[]
+
+
+print(f'El= {El}')
+print(f'Vf = {Vf}')
+print(f'Eta = {Eta}')
+print("A Matriz de valores para o módulo de Elaticidade transversal  [Eta x Vf] é:")
+print(Eta_matriz)
