@@ -32,19 +32,20 @@ for j, k in enumerate(Vf) and enumerate(Vm):
     El_posicao = (Ef*Vf[j]) + (Em*Vm[j])
     El.append(El_posicao)
 
-Rc=[]
-R_rhof = []
+Rfc=[]
+Rfm = []
 R_E = Ef/Em
-for b in range(0,3):
-    Rc_posicao = R_E / (R_E + (Vm[b]/Vf[b]))
-    Rc.append(Rc_posicao)
-    Rc[b] = round(Rc[b],2)     #arredondamento
-    #Razao de tensão utilizando o modulo de elasticidade. Verificar posteriormente
-    R_rhof_posicao = Ef/(El[b])
-    R_rhof.append(R_rhof_posicao)
-    R_rhof[b] = round(R_rhof[b], 2)  # arredondamento
+for b in range(0,4):
+    Rfc_posicao = R_E / (R_E + (Vm[b]/Vf[b]))
+    Rfc.append(Rfc_posicao)
+    Rfc[b] = round(Rfc[b],2)     #arredondamento
+    #Razao entre fibra e matriz
+    Rfm_posicao = Ef*Vf[b]/(Em*Vm[b])
+    Rfm.append(Rfm_posicao)
+    Rfm[b] = round(Rfm[b], 2)  # arredondamento
 
-print(El)
-print(Rc)
-print(R_rhof)
+print('Para Vf = 0.1, 0.25, 0.5, 0.75 respectivamente:')
+print(f'Módulo de elasticidade = {El}')
+print(f'Razão de carga entre fibra e compósito = {Rfc}')
+print(f'Razão de tensão entre fibra e o compósito = {Rfm}')
 
